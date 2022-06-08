@@ -1,0 +1,21 @@
+[Unit]
+Description=portal-api
+#The service will wait for  networking and syslog
+After=syslog.target network.target
+
+#not necessary but if it conflicts with something - add it here (like chrony and ntp)
+Conflicts=sendmail.service
+
+[Service]
+#The type could be different , depends on many things
+Type=simple
+
+ExecStart =/root/demo-0.0.1-SNAPSHOT.jar
+
+#Automatic restart by systemd
+Restart=on-failure
+#Time for system to wait before restart
+Restartsec=10s
+
+[Install]
+WantedBy=multi-user.target
